@@ -1,9 +1,4 @@
 @import "tailwindcss";
-<<<<<<< HEAD
-body {
-    @apply bg-gray-100 text-black;
-  }
-=======
 
 @plugin "tailwindcss-animate";
 
@@ -127,4 +122,3 @@ body {
     @apply bg-background text-foreground;
   }
 }
->>>>>>> 7bb365e4d7fab3f7bc5e853bbab57bf1ebeb8d67
