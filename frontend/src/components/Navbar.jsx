@@ -45,7 +45,7 @@ const Navbar = () => {
           />
           {isMenuOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-gray-200 shadow-md rounded-md p-4">
-            <div className="absolute -top-2 right-4 w-4 h-4 bg-gray-200 rotate-45"></div>
+            <div className="absolute -top-2 right-4 w-4 h-4 bg-gray-150 rotate-45"></div>
             <button className="w-full text-left py-2 px-4 hover:bg-orange-100">Sign In</button>
             <button className="w-full text-left py-2 px-4 hover:bg-orange-100">Log In</button>
             </div>
