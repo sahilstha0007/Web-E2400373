@@ -11,7 +11,7 @@ import { formatPrice } from "./lib/utils"; // Adjust path if needed
 
 const CourseCard = ({ course, onGoToCourse }) => {
   return (
-    <Card className="course-card group" onClick={() => onGoToCourse(course)}>
+    <Card className=" @apply flex flex-col w-full h-[340px] xl:h-[380px] border-none bg-primarybg overflow-hidden cursor-pointer hover:bg-white-100/10 transition duration-200;" onClick={() => onGoToCourse(course)}>
       <CardHeader className="course-card__header">
         <img
           src={course.image || "/placeholder.png"}
