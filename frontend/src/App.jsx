@@ -1,18 +1,20 @@
-import { useState } from 'react'
-import Navbar from './components/Navbar'
-import Login from './pages/Login'
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Courses from './pages/Courses';
 
 function App() {
   return (
     <Router>
-      <Navbar className=" sticky top-0 left-0 bg-white"/>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Login" element={<Login />} />
-        </Routes>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/courses" element={<Courses />} />
+      </Routes>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
