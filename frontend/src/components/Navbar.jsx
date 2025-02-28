@@ -1,10 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaBookOpen } from 'react-icons/fa';
+import { FaBookOpen, FaSun, FaMoon } from 'react-icons/fa';
 import defaultPFP from '../assets/non.png'; 
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }, [theme]);
 
   return (
     <header className="fixed top-0 left-0 w-full bg-white dark:bg-gray-800 flex justify-between items-center px-8 py-4 z-50">
@@ -28,39 +42,6 @@ const Navbar = () => {
         </nav>
       </div>
 
-<<<<<<< HEAD
-      <nav className="flex gap-10">
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? 'text-blue-500 font-semibold' : 'text-black hover:text-blue-500'}
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? 'text-blue-500 font-semibold' : 'text-black hover:text-blue-500'}
-          >
-          Team Members
-        </NavLink>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive ? 'text-blue-500 font-semibold' : 'text-black hover:text-blue-500'}
-          >
-          About Team
-        </NavLink>
-        <NavLink
-          // to="/"
-          className={({ isActive }) =>
-            isActive ? 'text-blue-500 font-semibold' : 'text-black hover:text-blue-500'}
-          >
-          <Button>Logout</Button>
-          {/* To dooo */}
-        </NavLink>
-      </nav>
-=======
       <div className="relative flex items-center gap-4">
         <input
           type="text"
@@ -88,9 +69,7 @@ const Navbar = () => {
           {theme === 'light' ? <FaMoon /> : <FaSun />}
         </button>
       </div>
->>>>>>> ddf4ef7d6b4329fe286161b8b01c0ad80fe24bbb
     </header>
-          </>
   );
 };
 
