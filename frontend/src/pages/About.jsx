@@ -5,7 +5,6 @@ function About() {
     <div>
       This is about
       
-      {/* Navbar test garna matra banako */}
     </div>
   )
 }

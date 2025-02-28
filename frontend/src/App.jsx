@@ -1,8 +1,8 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Courses from './pages/Courses';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Login from './pages/Login'
+import About from './pages/About'
+import Home from './pages/Home'
 
 function App() {
   const noNavbarRoutes = ['/login', "/"];
