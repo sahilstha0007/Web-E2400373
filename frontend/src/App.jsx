@@ -1,18 +1,35 @@
-import { useState } from 'react'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Login from './pages/Login'
-
+import About from './pages/About'
+import Home from './pages/Home'
 
 function App() {
+  const location = useLocation();
+  const noNavbarRoutes = ['/login', "/"];
+
   return (
-    <Router>
-      <Navbar className=" sticky top-0 left-0 bg-white"/>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Login" element={<Login />} />
-        </Routes>
-    </Router>
+    <>
+      {!noNavbarRoutes.includes(location.pathname) && (
+        <div className='sticky top-0 z-50 bg-[#AF8F6F]'>
+          <Navbar />
+        </div>
+      )}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </>
   )
 }
 
-export default App
+function AppWrapper() {
+  return (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+}
+
+export default AppWrapper;

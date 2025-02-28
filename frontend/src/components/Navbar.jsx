@@ -1,7 +1,9 @@
 import { NavLink } from 'react-router-dom';
+import { Button } from './ui/button';
 
 const Navbar = () => {
   return (
+<>
 
     <header className="header flex px-8 py-4">
       
@@ -21,18 +23,27 @@ const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             isActive ? 'text-blue-500 font-semibold' : 'text-black hover:text-blue-500'}
-        >
+          >
           Team Members
         </NavLink>
         <NavLink
           to="/"
           className={({ isActive }) =>
             isActive ? 'text-blue-500 font-semibold' : 'text-black hover:text-blue-500'}
-        >
+          >
           About Team
+        </NavLink>
+        <NavLink
+          // to="/"
+          className={({ isActive }) =>
+            isActive ? 'text-blue-500 font-semibold' : 'text-black hover:text-blue-500'}
+          >
+          <Button>Logout</Button>
+          {/* To dooo */}
         </NavLink>
       </nav>
     </header>
+          </>
   );
 };
 
