@@ -16,14 +16,14 @@ const Navbar = () => {
           Home
         </NavLink>
         <NavLink
-          to="/"
+          to=""
           className={({ isActive }) =>
             isActive ? 'text-blue-500 font-semibold' : 'text-black hover:text-blue-500'}
         >
-          Team Members
+         Login
         </NavLink>
         <NavLink
-          to="/"
+          to="/Login"
           className={({ isActive }) =>
             isActive ? 'text-blue-500 font-semibold' : 'text-black hover:text-blue-500'}
         >

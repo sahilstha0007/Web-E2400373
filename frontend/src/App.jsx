@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Navbar from './components/Navbar'
+import Login from './pages/Login'
 
 
 function App() {
@@ -8,11 +9,7 @@ function App() {
       <Navbar className=" sticky top-0 left-0 bg-white"/>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/TeamMember" element={<TeamMember />} />
-          <Route path="/AboutTeam" element={<AboutTeam />} />
-          <Route path="/Problems" element={<Problem />} />
-          <Route path="/OurGoal" element={<Goal />} />
-          <Route path="/Solution" element={<Solution />} />
+          <Route path="/Login" element={<Login />} />
         </Routes>
     </Router>
   )
