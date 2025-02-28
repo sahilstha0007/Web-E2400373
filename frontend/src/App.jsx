@@ -5,31 +5,18 @@ import About from './pages/About'
 import Home from './pages/Home'
 
 function App() {
-  const location = useLocation();
   const noNavbarRoutes = ['/login', "/"];
 
   return (
-    <>
-      {!noNavbarRoutes.includes(location.pathname) && (
-        <div className='sticky top-0 z-50 bg-[#AF8F6F]'>
-          <Navbar />
-        </div>
-      )}
+    <Router>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/courses" element={<Courses />} />
       </Routes>
-    </>
-  )
-}
-
-function AppWrapper() {
-  return (
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    </Router>
   );
 }
 
-export default AppWrapper;
+export default App;
