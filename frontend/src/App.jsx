@@ -5,11 +5,22 @@ import About from './pages/About';
 import Home from './pages/Home';
 import Courses from './pages/Courses';
 import AuthPage from './pages/auth/Login';
+import RouteProtection from './components/protected_Route/protection';
+import { AuthContext } from './context/auth-context';
+import { useContext } from 'react';
+import InstructorDashboardpage from './pages/instructor';
+import AddNewCoursePage from './pages/instructor/add-new-course';
 
 
 function AppContent() {
+  const { auth } = useContext(AuthContext);
   const location = useLocation();
-  const noNavbarRoutes = ['/auth', "/"];
+  const noNavbarRoutes = [
+    '/auth',
+     "/instructor",
+     "/instructor/create-new-course",
+     "/instructor/edit-course/:courseId",
+      "/"];
 
   return (
     <>
@@ -18,9 +29,57 @@ function AppContent() {
           <Navbar />
         </div>
       )}
-      
+
       <Routes>
-        <Route path="/" element={<Landing />} />
+        <Route
+          path="/"
+          element={
+            <RouteProtection
+              element={<Landing />}
+              authenticated={auth?.authenticate}
+              user={auth?.user}
+            />
+
+          }
+        />
+        <Route
+          path="/instructor"
+          element={
+            // <RouteGuard
+            // element={
+
+            <InstructorDashboardpage
+            //  />}
+            // authenticated={auth?.authenticate}
+            // user={auth?.user}
+            />
+          }
+        />
+
+        <Route
+          path="/instructor/create-new-course"
+          element={
+            // <RouteGuard
+              // element={
+              <AddNewCoursePage />
+            // }
+              // authenticated={auth?.authenticate}
+              // user={auth?.user}
+            // />
+          }
+        />
+        <Route
+        path="/instructor/edit-course/:courseId"
+        // element={
+          // <RouteGuard
+            element={
+            <AddNewCoursePage />
+          // }
+            // authenticated={auth?.authenticate}
+            // user={auth?.user}
+          // />
+        }
+      />
         <Route path="/home" element={<Home />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/about" element={<About />} />
@@ -32,7 +91,7 @@ function AppContent() {
 
 function App() {
   return (
-      <AppContent />
+    <AppContent />
 
   );
 }
