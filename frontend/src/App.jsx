@@ -7,7 +7,7 @@ import AuthPage from './pages/auth/Login';
 
 function AppContent() {
   const location = useLocation();
-  const noNavbarRoutes = ['/login', "/"];
+  const noNavbarRoutes = ['/auth', "/"];
 
   return (
     <>
