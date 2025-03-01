@@ -19,7 +19,7 @@ function AppContent() {
       
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/auth" element={<AuthPage />} />
+        {/* <Route path="/auth" element={<AuthPage />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<About />} />
         <Route path="/courses" element={<Courses />} />

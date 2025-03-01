@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaBookOpen, FaSun, FaMoon } from 'react-icons/fa';
-import defaultPFP from '../assets/non.png'; 
+import { FaBookOpen, FaSun, FaMoon, FaBell } from 'react-icons/fa';
+import defaultPFP from '../assets/non.png';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
@@ -25,31 +27,13 @@ const Navbar = () => {
       <div className="flex items-center gap-6 font-bold text-xl">
         <p className="text-orange-500 text-2xl">MVIC</p>
         <nav className="flex gap-6 font-light">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive
-                ? 'text-orange-500'
-                : 'text-black dark:text-white hover:text-black dark:hover:text-black'}
-          >
+          <NavLink to="/" className={({ isActive }) => isActive ? 'text-orange-500' : 'text-black dark:text-white hover:text-black dark:hover:text-black'}>
             Home
           </NavLink>
-          <NavLink
-            to="/courses"
-            className={({ isActive }) =>
-              isActive
-                ? 'text-orange-500'
-                : 'text-black dark:text-white hover:text-black dark:hover:text-black'}
-          >
+          <NavLink to="/courses" className={({ isActive }) => isActive ? 'text-orange-500' : 'text-black dark:text-white hover:text-black dark:hover:text-black'}>
             Courses
           </NavLink>
-          <NavLink
-            to="/about"
-            className={({ isActive }) =>
-              isActive
-                ? 'text-orange-500'
-                : 'text-black dark:text-white hover:text-black dark:hover:text-black'}
-          >
+          <NavLink to="/about" className={({ isActive }) => isActive ? 'text-orange-500' : 'text-black dark:text-white hover:text-black dark:hover:text-black'}>
             About
           </NavLink>
         </nav>
@@ -62,6 +46,15 @@ const Navbar = () => {
           className="border rounded-full py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-orange-500 dark:bg-[#36393f] dark:text-white"
         />
         <FaBookOpen className="absolute left-4 top-3 text-gray-500 dark:text-gray-300" />
+        
+        <div className="relative">
+          <FaBell className="text-xl cursor-pointer" onClick={() => setIsNotifOpen(!isNotifOpen)} />
+          {isNotifOpen && (
+            <div className="absolute right-0 mt-2 w-48 bg-gray-200 dark:bg-[#2f3136] shadow-md rounded-md p-4">
+              <p className="text-black dark:text-white">No new notifications</p>
+            </div>
+          )}
+        </div>
         
         <div className="relative">
           <img
@@ -82,6 +75,7 @@ const Navbar = () => {
             </div>
           )}
         </div>
+        
         <button onClick={toggleTheme} className="text-xl">
           {theme === 'light' ? <FaMoon /> : <FaSun />}
         </button>
