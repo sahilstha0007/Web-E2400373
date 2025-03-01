@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Login from './pages/Login';
 import About from './pages/About';
 import Home from './pages/Home';
 import Courses from './pages/Courses';
+import AuthPage from './pages/auth/Login';
 
 function AppContent() {
   const location = useLocation();
@@ -19,8 +19,7 @@ function AppContent() {
       
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/auth" element={<AuthPage />} /> */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/auth" element={<AuthPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/courses" element={<Courses />} />
       </Routes>
