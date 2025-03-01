@@ -1,9 +1,11 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Landing from './pages/Landing';
 import About from './pages/About';
 import Home from './pages/Home';
 import Courses from './pages/Courses';
 import AuthPage from './pages/auth/Login';
+
 
 function AppContent() {
   const location = useLocation();
@@ -18,7 +20,7 @@ function AppContent() {
       )}
       
       <Routes>
-        <Route path="/" />
+        <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/about" element={<About />} />
