@@ -27,7 +27,7 @@ const Navbar = () => {
       <div className="flex items-center gap-6 font-bold text-xl">
         <p className="text-orange-500 text-2xl">MVIC</p>
         <nav className="flex gap-6 font-light">
-          <NavLink to="/" className={({ isActive }) => isActive ? 'text-orange-500' : 'text-black dark:text-white hover:text-black dark:hover:text-black'}>
+          <NavLink to="/home" className={({ isActive }) => isActive ? 'text-orange-500' : 'text-black dark:text-white hover:text-black dark:hover:text-black'}>
             Home
           </NavLink>
           <NavLink to="/courses" className={({ isActive }) => isActive ? 'text-orange-500' : 'text-black dark:text-white hover:text-black dark:hover:text-black'}>
