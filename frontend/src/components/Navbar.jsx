@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaBookOpen, FaSun, FaMoon, FaBell } from 'react-icons/fa';
+import { FaBookOpen, FaSun, FaMoon, FaBell, FaBars, FaTimes } from 'react-icons/fa';
 import defaultPFP from '../assets/non.png';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
 
   const toggleTheme = () => {
@@ -26,7 +27,7 @@ const Navbar = () => {
     <header className="fixed top-0 left-0 w-full bg-gray-100 dark:bg-[#2f3136] flex justify-between items-center px-8 py-4 z-50">
       <div className="flex items-center gap-6 font-bold text-xl">
         <p className="text-orange-500 text-2xl">MVIC</p>
-        <nav className="flex gap-6 font-light">
+        <nav className="hidden md:flex gap-6 font-light">
           <NavLink to="/" className={({ isActive }) => isActive ? 'text-orange-500' : 'text-black dark:text-white hover:text-black dark:hover:text-black'}>
             Home
           </NavLink>
@@ -79,7 +80,32 @@ const Navbar = () => {
         <button onClick={toggleTheme} className="text-xl">
           {theme === 'light' ? <FaMoon /> : <FaSun />}
         </button>
+        <button className="md:hidden text-xl ml-4" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+          {isSidebarOpen ? <FaTimes /> : <FaBars />}
+        </button>
       </div>
+
+      {isSidebarOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" onClick={() => setIsSidebarOpen(false)}>
+          <div className="fixed left-0 top-0 w-64 h-full bg-gray-100 dark:bg-[#2f3136] shadow-md z-50 p-4 transform transition-transform duration-300 ease-in-out">
+            <button className="text-xl mb-4" onClick={() => setIsSidebarOpen(false)}>
+              <FaTimes />
+            </button>
+            <nav className="flex flex-col gap-4">
+              <NavLink to="/" className={({ isActive }) => isActive ? 'text-orange-500' : 'text-black dark:text-white hover:text-black dark:hover:text-black'}>
+                Home
+              </NavLink>
+              <NavLink to="/courses" className={({ isActive }) => isActive ? 'text-orange-500' : 'text-black dark:text-white hover:text-black dark:hover:text-black'}>
+                Courses
+              </NavLink>
+              <NavLink to="/about" className={({ isActive }) => isActive ? 'text-orange-500' : 'text-black dark:text-white hover:text-black dark:hover:text-black'}>
+                About
+              </NavLink>
+            </nav>
+          </div>
+          <div className="fixed right-0 top-0 w-full h-full bg-black bg-opacity-25 z-30"></div>
+        </div>
+      )}
     </header>
   );
 };
