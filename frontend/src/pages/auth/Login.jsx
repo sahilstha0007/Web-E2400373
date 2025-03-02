@@ -1,4 +1,5 @@
 import CommonForm from "@/components/common-form";
+import { FaBookOpen, FaSun, FaMoon } from 'react-icons/fa';
 import {
   Card,
   CardContent,
@@ -9,12 +10,12 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { signInFormControls, signUpFormControls } from "@/config";
 import { AuthContext } from "@/context/auth-context";
-import { GraduationCap } from "lucide-react";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function AuthPage() {
   const [activeTab, setActiveTab] = useState("signin");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const {
     signInFormData,
     setSignInFormData,
@@ -24,8 +25,17 @@ function AuthPage() {
     handleLoginUser,
   } = useContext(AuthContext);
 
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   function handleTabChange(value) {
     setActiveTab(value);
+  }
+
+  function toggleTheme() {
+    setTheme(prevTheme => (prevTheme === "light" ? "dark" : "light"));
   }
 
   function checkIfSignInFormIsValid() {
@@ -45,15 +55,15 @@ function AuthPage() {
     );
   }
 
-  console.log(signInFormData);
-
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="px-4 lg:px-6 h-14 flex items-center border-b">
+    <div className={`flex flex-col min-h-screen ${theme}`}> 
+      <header className="px-4 lg:px-6 h-14 flex items-center justify-between border-b">
         <Link to={"/"} className="flex items-center justify-center">
-          <GraduationCap className="h-8 w-8 mr-4" />
-          <span className="font-extrabold text-xl text-orange-500">MLMS </span>
+          <span className="text-orange-500 text-2xl">MVIC</span>
         </Link>
+        <button onClick={toggleTheme} className="text-xl">
+          {theme === "light" ? <FaMoon /> : <FaSun />}
+        </button>
       </header>
       <div className="flex items-center justify-center min-h-screen bg-background">
         <Tabs
