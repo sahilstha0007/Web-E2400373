@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import courses from "../components/course";
+import CoursePage from "../pages/Coursepage";
 
 function Home() {
   const slides = [
@@ -11,6 +12,7 @@ function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedFaculty, setSelectedFaculty] = useState("BHM");
   const [randomCourses, setRandomCourses] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
@@ -35,6 +37,10 @@ function Home() {
 
   const filteredCourses = courses.filter(course => course.faculty === selectedFaculty);
 
+  if (selectedCourse) {
+    return <CoursePage course={selectedCourse} onBack={() => setSelectedCourse(null)} />;
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-[#2f3136] text-black dark:text-white">
       <header className="relative w-full h-96 overflow-hidden">
@@ -49,7 +55,7 @@ function Home() {
         <h3 className="text-2xl font-semibold">Featured Courses</h3>
         <div className="grid grid-cols-3 gap-6 mt-4">
           {randomCourses.map((course, index) => (
-            <div key={index} className="bg-white dark:bg-gray-800 shadow-md p-4 rounded-lg">
+            <div key={index} className="bg-white dark:bg-gray-800 shadow-md p-4 rounded-lg cursor-pointer" onClick={() => setSelectedCourse(course)}>
               <img src={course.image} alt={course.name} className="w-full h-40 object-cover rounded-md" />
               <h4 className="text-xl font-bold mt-2">{course.name}</h4>
               <p className="text-gray-600 dark:text-gray-300">{course.desc}</p>
@@ -60,37 +66,38 @@ function Home() {
           ))}
         </div>
       </section>
-      <section className="p-6">
-  <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Faculties</h3>
-  <div className="flex gap-4 mt-4">
-    {["BHM", "BBA", "BIT"].map((faculty) => (
-      <button
-        key={faculty}
-        className={`px-4 py-2 rounded-md ${selectedFaculty === faculty ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-700 dark:text-white"}`}
-        onClick={() => setSelectedFaculty(faculty)}
-      >
-        {faculty}
-      </button>
-    ))}
-  </div>
-</section>
-<section className="p-6">
-  <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Courses for {selectedFaculty}</h3>
-  <div className="grid grid-cols-3 gap-6 mt-4">
-    {filteredCourses.length > 0 ? (
-      filteredCourses.map((course, index) => (
-        <div key={index} className="bg-white shadow-md p-4 rounded-lg dark:bg-gray-800 dark:text-white">
-          <img src={course.image} alt={course.name} className="w-full h-40 object-cover rounded-md" />
-          <h4 className="text-xl font-bold mt-2">{course.name}</h4>
-          <p className="text-gray-600 dark:text-gray-400">{course.desc}</p>
-        </div>
-      ))
-    ) : (
-      <p className="text-gray-600 dark:text-gray-400">No courses available for this faculty.</p>
-    )}
-  </div>
-</section>
 
+      <section className="p-6">
+        <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Faculties</h3>
+        <div className="flex gap-4 mt-4">
+          {["BHM", "BBA", "BIT"].map((faculty) => (
+            <button
+              key={faculty}
+              className={`px-4 py-2 rounded-md ${selectedFaculty === faculty ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-700 dark:text-white"}`}
+              onClick={() => setSelectedFaculty(faculty)}
+            >
+              {faculty}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section className="p-6">
+        <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Courses for {selectedFaculty}</h3>
+        <div className="grid grid-cols-3 gap-6 mt-4">
+          {filteredCourses.length > 0 ? (
+            filteredCourses.map((course, index) => (
+              <div key={index} className="bg-white shadow-md p-4 rounded-lg dark:bg-gray-800 dark:text-white cursor-pointer" onClick={() => setSelectedCourse(course)}>
+                <img src={course.image} alt={course.name} className="w-full h-40 object-cover rounded-md" />
+                <h4 className="text-xl font-bold mt-2">{course.name}</h4>
+                <p className="text-gray-600 dark:text-gray-400">{course.desc}</p>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-600 dark:text-gray-400">No courses available for this faculty.</p>
+          )}
+        </div>
+      </section>
     </div>
   );
 }
