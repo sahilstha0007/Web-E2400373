@@ -16,7 +16,7 @@ const CoursePage = ({ course }) => {
           <h1 className="text-4xl font-bold mb-4">{course.name}</h1>
           <p className="text-gray-700 dark:text-gray-300 mb-4">{course.desc}</p>
           <div className="flex items-center gap-2 text-blue-500">
-            <span className="text-gray-800 dark:text-gray-300 text-lg">Faculty:</span>
+            <span className="font-bold text-lg">Faculty:</span>
             <span className="font-bold text-lg">{course.faculty}</span>
           </div>
           <div className="mt-4 flex items-center gap-4">
