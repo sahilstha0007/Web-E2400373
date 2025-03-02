@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import CoursePage from "../pages/Coursepage"; // Ensure this file exists
 
 const courses = {
   BIT: [
@@ -24,34 +24,37 @@ const courses = {
 };
 
 const CourseList = () => {
-  const navigate = useNavigate();
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
-  const handleClick = (course) => {
-    navigate(`/course/${course.title.replace(/\s+/g, '-').toLowerCase()}`, { state: course });
-  };
+  // Show the Course Page if a course is selected
+  if (selectedCourse) {
+    return <CoursePage course={selectedCourse} onBack={() => setSelectedCourse(null)} />;
+  }
 
   return (
-    <div className="p-8">
+    <div className="min-h-screen p-8 bg-gray-100 dark:bg-[#2f3136] text-black dark:text-white">
+      {/* Header Section */}
       <div className="text-center py-16 bg-blue-600 text-white rounded-lg shadow-lg mb-10">
         <h1 className="text-4xl font-bold">Explore BIT, BHM, and BBA Courses</h1>
         <p className="text-lg mt-4">Learn from experienced, real-world experts and boost your career.</p>
       </div>
-      
+
+      {/* Course Categories */}
       {Object.keys(courses).map((category) => (
         <div key={category} className="mb-12">
-          <h2 className="text-3xl font-semibold mb-6 text-center text-gray-800">{category} Courses</h2>
+          <h2 className="text-3xl font-semibold mb-6 text-center">{category} Courses</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {courses[category].map((course, index) => (
-              <motion.div 
-                key={index} 
-                className="border p-4 rounded-lg shadow-lg bg-white cursor-pointer"
+              <motion.div
+                key={index}
+                className="border p-4 rounded-lg shadow-lg bg-white dark:bg-gray-800 dark:text-white cursor-pointer"
                 whileHover={{ scale: 1.05 }}
-                onClick={() => handleClick(course)}
+                onClick={() => setSelectedCourse(course)}
               >
                 <img src={course.image} alt={course.title} className="w-full h-40 object-cover rounded-md mb-4" />
                 <h3 className="text-xl font-medium mb-2">{course.title}</h3>
-                <p className="text-gray-700 mb-2">{course.description}</p>
-                <p className="text-gray-600 font-semibold">Faculty: {course.faculty}</p>
+                <p className="text-gray-700 dark:text-gray-300 mb-2">{course.description}</p>
+                <p className="text-gray-600 dark:text-gray-400 font-semibold">Faculty: {course.faculty}</p>
               </motion.div>
             ))}
           </div>
