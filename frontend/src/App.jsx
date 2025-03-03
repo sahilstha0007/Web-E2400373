@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Landing from './pages/Landing';
-import About from './pages/About';
 import Home from './pages/Home';
 import Courses from './pages/Courses';
 import AuthPage from './pages/auth/Login';
@@ -10,6 +9,7 @@ import { AuthContext } from './context/auth-context';
 import { useContext } from 'react';
 import InstructorDashboardpage from './pages/instructor';
 import AddNewCoursePage from './pages/instructor/add-new-course';
+import Affiliate from './pages/Affiliate';
 
 
 function AppContent() {
@@ -82,7 +82,7 @@ function AppContent() {
       />
         <Route path="/home" element={<Home />} />
         <Route path="/auth" element={<AuthPage />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/affiliate" element={<Affiliate />} />
         <Route path="/courses" element={<Courses />} />
       </Routes>
     </>
