@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button"; // Import Button from shadcn
+import { Button } from "@/components/ui/button";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import affiliateImage from '../assets/affiliate.png'; // Import the new image
+import affiliateImage from '../assets/affiliate.png'; 
 import joinUsImage from '../assets/joinus.png';
 import stayConnectedImage from '../assets/stayconnected.png';
 import graduationImage from '../assets/graduation.png';
-import Navbar from '../components/Navbar'; // Import Navbar
-import { Globe } from '@/components/magicui/globe'; // Import Globe
+import Navbar from '../components/Navbar'; 
+import { Globe } from '@/components/magicui/globe';
 
 export default function AffiliatePage() {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
@@ -31,22 +31,28 @@ export default function AffiliatePage() {
     <>
       <div className={`bg-gray-100 dark:bg-[#2f3136] text-gray-900 dark:text-gray-100`}>
       <Navbar toggleTheme={toggleTheme} theme={theme} />
-      <div className="bg-white dark:bg-[#3a3b3c] py-16">
-        <div className="container mx-auto px-4">
+      <div className="relative bg-white dark:bg-[#3a3b3c] py-16 overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-wrap items-center justify-between">
             <div className="w-full lg:w-1/2">
-              <h1 className="text-4xl font-bold text-orange-500">Become a Mid Valley International College<br />affiliate</h1>
-              <p className="mt-4">Partner with Mid Valley International College and earn extra income while helping students know about Mid Valley International College.</p>
+              <h1 className="text-4xl font-bold text-orange-500">
+                Become a Mid Valley International College<br />affiliate
+              </h1>
+              <p className="mt-4">
+                Partner with Mid Valley International College and earn extra income while helping students know about Mid Valley International College.
+              </p>
               <div className="mt-6">
-                <Button as="a" href="https://midvalley.edu.np/sign-up-affiliates" className="mr-4" style={{ backgroundColor: '#f97316', borderColor: '#f97316' }}>Apply Now</Button>
-                <Button as="a" href="https://midvalley.edu.np/login" variant="outline" style={{ backgroundColor: '#f97316', borderColor: '#f97316', color: '#fff' }}>Log In</Button>
+                <Button as="a" href="https://midvalley.edu.np/sign-up-affiliates" className="mr-4" style={{ backgroundColor: '#f97316', borderColor: '#f97316' }}>
+                  Apply Now
+                </Button>
+                <Button as="a" href="https://midvalley.edu.np/login" variant="outline" style={{ backgroundColor: '#f97316', borderColor: '#f97316', color: '#fff' }}>
+                  Log In
+                </Button>
               </div>
-            </div>
-            <div className="w-full lg:w-1/2 mt-8 lg:mt-0">
-              <img src={affiliateImage} alt="Affiliate Program" className="w-full h-auto max-h-[500px] object-cover" />
             </div>
           </div>
         </div>
+        <Globe className="absolute top-0 right-0 w-full lg:w-[600px] h-auto opacity-50" />
       </div>
       <section className="py-16 bg-gray-100 dark:bg-[#2f3136]">
         <div className="container mx-auto px-4">
@@ -125,7 +131,6 @@ export default function AffiliatePage() {
         </div>
       </section>
     </div>
-    <Globe />
     </>
   );
 }
