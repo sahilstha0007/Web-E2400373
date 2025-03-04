@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import CoursePage from "../pages/Coursepage"; // Ensure this file exists
+import CoursePage from "../pages/Coursepage"; 
 
 const courses = {
   BIT: [
