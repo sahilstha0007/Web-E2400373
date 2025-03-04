@@ -29,31 +29,34 @@ export default function AffiliatePage() {
 
   return (  
     <>
-      <div className={`bg-gray-100 dark:bg-[#2f3136] text-gray-900 dark:text-gray-100`}>
-      <Navbar toggleTheme={toggleTheme} theme={theme} />
-      <div className="relative bg-white dark:bg-[#3a3b3c] py-16 overflow-hidden">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-wrap items-center justify-between">
-            <div className="w-full lg:w-1/2">
-              <h1 className="text-4xl font-bold text-orange-500">
-                Become a Mid Valley International College<br />affiliate
-              </h1>
-              <p className="mt-4">
-                Partner with Mid Valley International College and earn extra income while helping students know about Mid Valley International College.
-              </p>
-              <div className="mt-6">
-                <Button as="a" href="https://midvalley.edu.np/sign-up-affiliates" className="mr-4" style={{ backgroundColor: '#f97316', borderColor: '#f97316' }}>
-                  Apply Now
-                </Button>
-                <Button as="a" href="https://midvalley.edu.np/login" variant="outline" style={{ backgroundColor: '#f97316', borderColor: '#f97316', color: '#fff' }}>
-                  Log In
-                </Button>
-              </div>
-            </div>
-          </div>
+<div className="relative bg-white dark:bg-[#3a3b3c] py-16 overflow-hidden">
+  <div className="container mx-auto px-4 relative">
+    <div className="flex flex-wrap items-center justify-between relative z-10">
+      <div className="w-full lg:w-1/2">
+        <h1 className="text-4xl font-bold text-orange-500">
+          Become a Mid Valley International College<br />affiliate
+        </h1>
+        <p className="mt-4">
+          Partner with Mid Valley International College and earn extra income while helping students know about Mid Valley International College.
+        </p>
+        <div className="mt-6">
+          <Button as="a" href="https://midvalley.edu.np/sign-up-affiliates" className="mr-4" style={{ backgroundColor: '#f97316', borderColor: '#f97316' }}>
+            Apply Now
+          </Button>
+          <Button as="a" href="https://midvalley.edu.np/login" variant="outline" style={{ backgroundColor: '#f97316', borderColor: '#f97316', color: '#fff' }}>
+            Log In
+          </Button>
         </div>
-        <Globe className="absolute top-0 right-0 w-full lg:w-[600px] h-auto opacity-50" />
       </div>
+      <div className="w-full lg:w-1/2 flex justify-center">
+            <img src="https://mysecondteacher.com.np/wp-content/uploads/2021/05/tutor-support.svg" 
+                 alt="Affiliate Program" 
+                 className="w-3/4 lg:w-2/3 h-auto object-contain" />
+          </div>
+    </div>
+  </div>
+
+
       <section className="py-16 bg-gray-100 dark:bg-[#2f3136]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -129,6 +132,12 @@ export default function AffiliatePage() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section>
+      <div className="relative h-100 w-full flex justify-center py-16">
+    <Globe className="w-[300px] lg:w-[400px] h-auto opacity-50" />
+  </div>
       </section>
     </div>
     </>
