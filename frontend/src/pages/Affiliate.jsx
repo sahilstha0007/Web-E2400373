@@ -1,145 +1,82 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent } from "@/components/ui/card";
-import { Accordion, AccordionItem } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
-import { ChevronDownIcon } from "@heroicons/react/solid";
-import affiliateImage from '../assets/affiliate.png'; 
-import joinUsImage from '../assets/joinus.png';
-import stayConnectedImage from '../assets/stayconnected.png';
-import graduationImage from '../assets/graduation.png';
-import Navbar from '../components/Navbar'; 
-import { Globe } from '@/components/magicui/globe';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import CoursePage from "../pages/Coursepage";
+import course from "../components/course"
 
-export default function AffiliatePage() {
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+const SkeletonLoader = () => (
+  <div className="animate-pulse space-y-4">
+    <div className="h-48 bg-gradient-to-r from-gray-200 to-gray-300 rounded-lg"></div>
+    <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+    <div className="h-4 bg-gray-200 rounded w-full"></div>
+  </div>
+);
 
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-  };
+const CourseList = () => {
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
-    if (theme === 'dark') {
-      document.body.classList.add('dark');
-    } else {
-      document.body.classList.remove('dark');
-    }
-  }, [theme]);
+    const timer = setTimeout(() => setIsLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
-  return (  
-    <>
-<div className="relative bg-white dark:bg-[#3a3b3c] py-16 overflow-hidden">
-  <div className="container mx-auto px-4 relative">
-    <div className="flex flex-wrap items-center justify-between relative z-10">
-      <div className="w-full lg:w-1/2">
-        <h1 className="text-4xl font-bold text-orange-500">
-          Become a Mid Valley International College<br />affiliate
-        </h1>
-        <p className="mt-4">
-          Partner with Mid Valley International College and earn extra income while helping students know about Mid Valley International College.
-        </p>
-        <div className="mt-6">
-          <Button as="a" href="https://midvalley.edu.np/sign-up-affiliates" className="mr-4" style={{ backgroundColor: '#f97316', borderColor: '#f97316' }}>
-            Apply Now
-          </Button>
-          <Button as="a" href="https://midvalley.edu.np/login" variant="outline" style={{ backgroundColor: '#f97316', borderColor: '#f97316', color: '#fff' }}>
-            Log In
-          </Button>
+  if (selectedCourse) {
+    return <CoursePage course={selectedCourse} onBack={() => setSelectedCourse(null)} />;
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-[#1A2A44] via-[#2E4057] to-[#4A709A] text-white p-6">
+      <div className="relative text-center py-20 bg-gradient-to-r from-[#1A2A44] to-[#F16529] rounded-2xl shadow-2xl mb-12 overflow-hidden">
+        <div className="absolute inset-0 bg-black opacity-40 rounded-2xl"></div>
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative text-5xl font-extrabold text-white mb-6 drop-shadow-lg"
+        >
+          Explore Our Courses
+        </motion.h1>
+        <p className="relative text-xl mb-8 text-gray-200">Advance Your Career with Industry Experts</p>
+      </div>
+
+      <div className="mb-12 px-4">
+        <div className="max-w-4xl mx-auto">
+          <select
+            className="w-full px-6 py-3 bg-[#2E4057] text-white border-none rounded-xl"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            <option value="All">All Categories</option>
+            {[...new Set(courses.map(course => course.faculty))].map((faculty) => (
+              <option key={faculty} value={faculty}>{faculty}</option>
+            ))}
+          </select>
         </div>
       </div>
-      <div className="w-full lg:w-1/2 flex justify-center">
-            <img src="https://mysecondteacher.com.np/wp-content/uploads/2021/05/tutor-support.svg" 
-                 alt="Affiliate Program" 
-                 className="w-3/4 lg:w-2/3 h-auto object-contain" />
-          </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {isLoading ? (
+          Array(4).fill().map((_, idx) => <SkeletonLoader key={idx} />)
+        ) : (
+          courses.filter(course => selectedCategory === "All" || course.faculty === selectedCategory).map((course, index) => (
+            <motion.div
+              key={index}
+              className="relative bg-[#2E4057] rounded-xl p-6 shadow-xl hover:shadow-2xl cursor-pointer"
+              whileHover={{ scale: 1.05, y: -5 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setSelectedCourse(course)}
+            >
+              <img src={course.image} alt={course.name} className="w-full h-40 object-cover rounded-lg mb-4" />
+              <h3 className="text-xl font-semibold text-white mb-2">{course.name}</h3>
+              <p className="text-gray-300 text-sm mb-4">{course.desc}</p>
+              <p className="text-gray-400 text-xs mb-4">Faculty: {course.faculty}</p>
+            </motion.div>
+          ))
+        )}
+      </div>
     </div>
-  </div>
-
-
-      <section className="py-16 bg-gray-100 dark:bg-[#2f3136]">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-orange-500">How it works?</h2>
-          </div>
-          <div className="flex flex-wrap justify-center">
-            <div className="w-full md:w-1/3 p-4">
-              <div className="bg-white dark:bg-[#3a3b3c] shadow-lg rounded-lg p-6 text-center">
-                <img src={joinUsImage} alt="Join Us" className="w-32 h-32 mx-auto object-contain" />
-                <h6 className="text-lg font-semibold mt-4 text-orange-500">Join the program</h6>
-              </div>
-            </div>
-            <div className="w-full md:w-1/3 p-4">
-              <div className="bg-white dark:bg-[#3a3b3c] shadow-lg rounded-lg p-6 text-center">
-                <img src={stayConnectedImage} alt="Stay Connected" className="w-32 h-32 mx-auto object-contain" />
-                <h6 className="text-lg font-semibold mt-4 text-orange-500">Promote Mid Valley International College</h6>
-              </div>
-            </div>
-            <div className="w-full md:w-1/3 p-4">
-              <div className="bg-white dark:bg-[#3a3b3c] shadow-lg rounded-lg p-6 text-center">
-                <img src={graduationImage} alt="Graduation" className="w-32 h-32 mx-auto object-contain" />
-                <h6 className="text-lg font-semibold mt-4 text-orange-500">Earn Commission</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="py-16 bg-gray-100 dark:bg-[#2f3136]">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-orange-500">Become a Mid Valley International College Affiliate</h2>
-          </div>
-          <div className="flex flex-wrap justify-center">
-            <div className="w-full md:w-1/3 p-4">
-              <div className="bg-white dark:bg-[#3a3b3c] shadow-lg rounded-lg p-6 text-center">
-                <h3 className="text-xl font-semibold text-orange-500">Step-1</h3>
-                <p className="mt-4">Click on "Apply Now" and fill up the form to apply for Mid Valley International College Enrollment</p>
-              </div>
-            </div>
-            <div className="w-full md:w-1/3 p-4">
-              <div className="bg-white dark:bg-[#3a3b3c] shadow-lg rounded-lg p-6 text-center">
-                <h3 className="text-xl font-semibold text-orange-500">Step-2</h3>
-                <p className="mt-4">We will review your application and notify you within 3 working days</p>
-              </div>
-            </div>
-            <div className="w-full md:w-1/3 p-4">
-              <div className="bg-white dark:bg-[#3a3b3c] shadow-lg rounded-lg p-6 text-center">
-                <h3 className="text-xl font-semibold text-orange-500">Step-3</h3>
-                <p className="mt-4">Once approved, You can login Lms of Mid Valley International College.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="py-16 bg-gray-100 dark:bg-[#2f3136]">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-orange-500">Frequently Asked Questions</h2>
-          </div>
-          <div className="flex justify-center">
-            <div className="w-full lg:w-2/3">
-              <Accordion type="single" collapsible>
-                <AccordionItem value="what-is-mid-valley-international-college" title="What is Mid Valley International College?" icon={<ChevronDownIcon className="h-5 w-5" />}>
-                  <p>Mid Valley International College provides online video courses for grades 1-12, engineering entrance, and more.</p>
-                </AccordionItem>
-                <AccordionItem value="affiliate-program" title="What is Mid Valley International College Affiliate Program?" icon={<ChevronDownIcon className="h-5 w-5" />}>
-                  <p>It allows you to earn commissions by referring students to Mid Valley International College.</p>
-                </AccordionItem>
-                <AccordionItem value="how-to-apply" title="How do I apply?" icon={<ChevronDownIcon className="h-5 w-5" />}>
-                  <p>Click "Apply Now," fill in the form, and wait for approval.</p>
-                </AccordionItem>
-              </Accordion>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-      <div className="relative h-100 w-full flex justify-center py-16">
-    <Globe className="w-[300px] lg:w-[400px] h-auto opacity-50" />
-  </div>
-      </section>
-    </div>
-    </>
   );
-}
+};
+
+export default CourseList;
