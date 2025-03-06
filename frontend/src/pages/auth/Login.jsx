@@ -74,14 +74,43 @@ function AuthPage() {
   const [SScale, SPosition] = sizeBook();
 
   return (
-    <Canvas camera={{ near: 0.1, far: 1000 }}>
-      <Suspense fallback={null}>
-        <directionalLight position={[10, 1, 1]} intensity={2} />
-        <ambientLight intensity={0.5} />
-        <hemisphereLight skyColor="#b1efff" groundColor="#000000" intensity={1} />
-        <Book position={SPosition} scale={SScale} />
-      </Suspense>
-    </Canvas>
+    <div>
+      <div className="theme-toggle" onClick={toggleTheme}>
+        {theme === "light" ? <FaMoon /> : <FaSun />}
+      </div>
+      <Tabs value={activeTab} onValueChange={handleTabChange}>
+        <TabsList>
+          <TabsTrigger value="signin">Sign In</TabsTrigger>
+          <TabsTrigger value="signup">Sign Up</TabsTrigger>
+        </TabsList>
+        <TabsContent value="signin">
+          <CommonForm
+            formControls={signInFormControls}
+            formData={signInFormData}
+            setFormData={setSignInFormData}
+            handleSubmit={handleLoginUser}
+            isFormValid={checkIfSignInFormIsValid}
+          />
+        </TabsContent>
+        <TabsContent value="signup">
+          <CommonForm
+            formControls={signUpFormControls}
+            formData={signUpFormData}
+            setFormData={setSignUpFormData}
+            handleSubmit={handleRegisterUser}
+            isFormValid={checkIfSignUpFormIsValid}
+          />
+        </TabsContent>
+      </Tabs>
+      <Canvas camera={{ near: 0.1, far: 1000 }}>
+        <Suspense fallback={null}>
+          <directionalLight position={[10, 1, 1]} intensity={2} />
+          <ambientLight intensity={0.5} />
+          <hemisphereLight skyColor="#b1efff" groundColor="#000000" intensity={1} />
+          <Book position={SPosition} scale={SScale} />
+        </Suspense>
+      </Canvas>
+    </div>
   );
 }
 
