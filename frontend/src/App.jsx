@@ -9,6 +9,7 @@ import { useContext } from 'react';
 import InstructorDashboardpage from './pages/instructor';
 import AddNewCoursePage from './pages/instructor/add-new-course';
 import Affiliate from './pages/Affiliate';
+import Login from './pages/auth/Login';
 
 
 function AppContent() {
@@ -89,7 +90,8 @@ function AppContent() {
 
 function App() {
   return (
-    <AppContent />
+    // <AppContent />
+    <Login />
 
   );
 }
