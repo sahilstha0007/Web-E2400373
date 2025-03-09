@@ -1,10 +1,8 @@
-
 import React, { useState } from "react";
 import axios from "axios";
 
 const Login = () => {
   const [isSignup, setIsSignup] = useState(false);
-  const [role, setRole] = useState("Student");
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -17,12 +15,12 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const endpoint = isSignup ? "http://localhost:8080/auth/signup" : "http://localhost:8080/auth/login";
-
+    
     try {
-      const response = await axios.post(endpoint, isSignup ? { ...formData, role } : formData);
-      alert(response.data.message || "Success!");
+      const response = await axios.post(endpoint, formData);
+      alert(response.data || "Success!");
     } catch (error) {
-      alert(error.response?.data?.message || "Something went wrong!");
+      alert(error.response?.data || "Something went wrong!");
     }
   };
 
@@ -55,19 +53,6 @@ const Login = () => {
               required
             />
           </div>
-          {isSignup && (
-            <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Select Role</label>
-              <select
-                className="w-full px-3 py-2 border rounded-lg"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-              >
-                <option value="Student">Student</option>
-                <option value="Teacher">Teacher</option>
-              </select>
-            </div>
-          )}
           <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
             {isSignup ? "Sign Up" : "Login"}
           </button>

@@ -1,14 +1,9 @@
 package webbe.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import webbe.backend.model.User;
 import webbe.backend.repository.UserRepository;
-import webbe.backend.dto.LoginRequest;
-import webbe.backend.dto.SignupRequest;
-
-import java.util.Optional;
+import webbe.backend.model.User;
 
 @Service
 public class UserService {
@@ -16,29 +11,26 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public ResponseEntity<?> registerUser(SignupRequest request) {
-        Optional<User> existingUser = userRepository.findByUsername(request.getUsername());
-        if (existingUser.isPresent()) {
-            return ResponseEntity.badRequest().body("Username already taken!");
+    public boolean registerUser(String username, String password) {
+        // Check if the user already exists
+        if (userRepository.existsByUsername(username)) {
+            return false;  // User exists, return false
         }
 
+        // Create a new user and save them in the database
         User user = new User();
-        user.setUsername(request.getUsername());
-        user.setPassword(request.getPassword());  // No encryption
-        user.setRole(request.getRole());
+        user.setUsername(username);
+        user.setPassword(password);  // In a real app, hash the password before saving
 
         userRepository.save(user);
-        return ResponseEntity.ok("User registered successfully!");
+        return true;
     }
 
-    public ResponseEntity<?> authenticateUser(LoginRequest request) {
-        Optional<User> userOptional = userRepository.findByUsername(request.getUsername());
+    public boolean authenticateUser(String username, String password) {
+        // Find the user by username
+        User user = userRepository.findByUsername(username);
 
-        if (userOptional.isEmpty() ||
-                !request.getPassword().equals(userOptional.get().getPassword())) {
-            return ResponseEntity.badRequest().body("Invalid username or password!");
-        }
-
-        return ResponseEntity.ok("Login successful!");
+        // If the user exists, check the password (for now, we are assuming it's plain text)
+        return user != null && user.getPassword().equals(password);
     }
 }

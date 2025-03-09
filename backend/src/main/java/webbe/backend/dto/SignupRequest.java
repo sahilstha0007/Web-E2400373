@@ -3,21 +3,16 @@ package webbe.backend.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 public class SignupRequest {
-    // Getters and Setters
     private String username;
     private String password;
-    private String role;
 
-    // Constructors
     public SignupRequest() {}
 
-    public SignupRequest(String username, String password, String role) {
+    public SignupRequest(String username, String password) {
         this.username = username;
         this.password = password;
-        this.role = role;
     }
-
 }
