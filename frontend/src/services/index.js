@@ -1,24 +1,6 @@
 import axiosInstance from "@/api/axiosInstance";
 import axios from "axios";
 
-export const loginService = async (formData) => {
-  try {
-    const response = await axios.post("http://localhost:8080/auth/login", formData);
-    return response.data;
-  } catch (error) {
-    return error.response?.data || { success: false, message: "Something went wrong!" };
-  }
-};
-
-export const registerService = async (formData) => {
-  try {
-    const response = await axios.post("http://localhost:8080/auth/signup", formData);
-    return response.data;
-  } catch (error) {
-    return error.response?.data || { success: false, message: "Something went wrong!" };
-  }
-};
-
 export const checkAuthService = async () => {
   try {
     const response = await axios.get("http://localhost:8080/auth/check-auth", {
@@ -31,7 +13,6 @@ export const checkAuthService = async () => {
     return error.response?.data || { success: false, message: "Something went wrong!" };
   }
 };
-
 export async function mediaUploadService(formData, onProgressCallback) {
   const { data } = await axiosInstance.post("/media/upload", formData, {
     onUploadProgress: (progressEvent) => {
