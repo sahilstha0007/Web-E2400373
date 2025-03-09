@@ -9,11 +9,7 @@ import { useContext } from 'react';
 import InstructorDashboardpage from './pages/instructor';
 import AddNewCoursePage from './pages/instructor/add-new-course';
 import Affiliate from './pages/Affiliate';
-<<<<<<< HEAD
 import Landing from './pages/Landing';
-=======
-import Login from './pages/auth/Login';
->>>>>>> afaf883861163492356e2886c1359a22b7373ba3
 
 
 function AppContent() {
@@ -84,9 +80,20 @@ function AppContent() {
           // />
         }
       />
+       <Route
+        path="/instructor/edit-course/:courseId"
+        element={
+          <RouteGuard
+            element={
+            <Home />
+          }
+            authenticated={auth?.authenticate}
+            user={auth?.user}
+          />
+        }
+      />
 
         <Route path="/" element={<Landing />} />
-        <Route path="/home" element={<Home />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/affiliate" element={<Affiliate />} />
         <Route path="/courses" element={<Courses />} />
