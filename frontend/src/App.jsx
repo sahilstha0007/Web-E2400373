@@ -9,6 +9,7 @@ import { useContext } from 'react';
 import InstructorDashboardpage from './pages/instructor';
 import AddNewCoursePage from './pages/instructor/add-new-course';
 import Affiliate from './pages/Affiliate';
+import Landing from './pages/Landing';
 
 
 function AppContent() {
@@ -18,7 +19,8 @@ function AppContent() {
     '/auth',
      "/instructor",
      "/instructor/create-new-course",
-     "/instructor/edit-course/:courseId",];
+     "/instructor/edit-course/:courseId",
+    "/"];
 
   return (
     <>
@@ -78,7 +80,9 @@ function AppContent() {
           // />
         }
       />
-        <Route path="/" element={<Home />} />
+
+        <Route path="/" element={<Landing />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/affiliate" element={<Affiliate />} />
         <Route path="/courses" element={<Courses />} />
