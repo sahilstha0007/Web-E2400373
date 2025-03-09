@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import courses from "../components/course";
 import CoursePage from "../pages/Coursepage";
 
@@ -37,6 +38,11 @@ function Home() {
 
   const filteredCourses = courses.filter(course => course.faculty === selectedFaculty);
 
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  };
+
   if (selectedCourse) {
     return <CoursePage course={selectedCourse} onBack={() => setSelectedCourse(null)} />;
   }
@@ -51,7 +57,7 @@ function Home() {
         </div>
       </header>
 
-      <section className="p-6">
+      <motion.section className="p-6" initial="hidden" animate="visible" variants={sectionVariants}>
         <h3 className="text-2xl font-semibold">Featured Courses</h3>
         <div className="grid grid-cols-3 gap-6 mt-4">
           {randomCourses.map((course, index) => (
@@ -65,9 +71,9 @@ function Home() {
             </div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
-      <section className="p-6">
+      <motion.section className="p-6" initial="hidden" animate="visible" variants={sectionVariants}>
         <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Faculties</h3>
         <div className="flex gap-4 mt-4">
           {["BHM", "BBA", "BIT"].map((faculty) => (
@@ -80,9 +86,9 @@ function Home() {
             </button>
           ))}
         </div>
-      </section>
+      </motion.section>
 
-      <section className="p-6">
+      <motion.section className="p-6" initial="hidden" animate="visible" variants={sectionVariants}>
         <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Courses for {selectedFaculty}</h3>
         <div className="grid grid-cols-3 gap-6 mt-4">
           {filteredCourses.length > 0 ? (
@@ -97,7 +103,7 @@ function Home() {
             <p className="text-gray-600 dark:text-gray-400">No courses available for this faculty.</p>
           )}
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }

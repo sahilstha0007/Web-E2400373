@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Landing from './pages/Landing';
 import Home from './pages/Home';
 import Courses from './pages/Courses';
 import AuthPage from './pages/auth/Login';

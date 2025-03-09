@@ -35,6 +35,21 @@ const CourseList = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }, [theme]);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1500);
@@ -46,9 +61,14 @@ const CourseList = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#1A2A44] via-[#2E4057] to-[#4A709A] text-white p-6">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className={`min-h-screen ${theme === 'light' ? 'bg-gradient-to-b from-[#1A2A44] via-[#2E4057] to-[#4A709A] text-white' : 'bg-[#1A2A44] text-white'} p-6`}
+    >
       {/* Hero Section with Image Color Theme */}
-      <div className="relative text-center py-20 bg-gradient-to-r from-[#1A2A44] to-[#F16529] rounded-2xl shadow-2xl mb-12 overflow-hidden">
+      <div className={`relative text-center py-20 ${theme === 'light' ? 'bg-gradient-to-r from-[#1A2A44] to-[#F16529]' : 'bg-gradient-to-r from-[#1A2A44] to-[#F16529]'} rounded-2xl shadow-2xl mb-12 overflow-hidden`}>
         <div className="absolute inset-0 bg-black opacity-40 rounded-2xl"></div>
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
@@ -81,7 +101,7 @@ const CourseList = () => {
       <div className="mb-12 px-4">
         <div className="max-w-4xl mx-auto">
           <select
-            className="w-full px-6 py-3 bg-[#2E4057] text-white border-none rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E76F51] font-medium text-lg transition-all duration-300"
+            className={`w-full px-6 py-3 ${theme === 'light' ? 'bg-[#2E4057] text-white' : 'bg-[#2E4057] text-white'} border-none rounded-xl focus:outline-none focus:ring-2 focus:ring-[#E76F51] font-medium text-lg transition-all duration-300`}
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
@@ -101,7 +121,13 @@ const CourseList = () => {
         if (filteredCourses.length === 0) return null;
 
         return (
-          <div key={category} className="mb-16">
+          <motion.div
+            key={category}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mb-16"
+          >
             <div className="flex items-center mb-10">
               <div className="flex-1 border-t-4 border-[#E76F51]"></div>
               <h2 className="mx-6 text-4xl font-bold text-[#E76F51] drop-shadow-lg">
@@ -120,7 +146,7 @@ const CourseList = () => {
                 filteredCourses.map((course, index) => (
                   <motion.div
                     key={index}
-                    className="relative bg-[#2E4057] rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                    className={`relative ${theme === 'light' ? 'bg-[#2E4057]' : 'bg-[#1A2A44]'} rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer`}
                     whileHover={{ scale: 1.05, y: -5 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setSelectedCourse(course)}
@@ -144,19 +170,20 @@ const CourseList = () => {
                 ))
               )}
             </div>
-          </div>
+          </motion.div>
         );
       })}
 
       {/* Floating Action Button */}
       <motion.button
-        className="fixed bottom-10 right-10 p-4 bg-[#E76F51] text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+        className="fixed bottom-10 right-10 p-4 bg-[#E76F51] text-white rounded-full shadow-lg hover:shadow-xl transitions-all duration-300"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
+        onClick={toggleTheme}
       >
         📩 Enquire Now
       </motion.button>
-    </div>
+    </motion.div>
   );
 };
 

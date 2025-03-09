@@ -52,7 +52,6 @@ const Navbar = () => {
         </nav>
       </div>
 
-
       <div className="flex items-center gap-6">
         <div className="relative flex items-center gap-4" ref={searchContainerRef}>
           <input

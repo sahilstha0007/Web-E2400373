@@ -284,7 +284,7 @@ export default function AffiliatePage() {
           viewport={{ once: true }} 
           transition={{ duration: 0.5, delay: 0.8 }}
         >
-          <div className="relative h-100 w-full flex justify-center py-16">
+          <div className="relative h-100 w-full flex justify-center py-16 md:py-24">
             <Globe className="w-[300px] lg:w-[400px] h-auto opacity-50" />
           </div>
         </motion.section>
