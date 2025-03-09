@@ -101,7 +101,7 @@ export default function AffiliatePage() {
               <div className="w-full md:w-1/3 p-4">
                 <div className="bg-white dark:bg-[#3a3b3c] shadow-lg rounded-lg p-6 text-center">
                   <h3 className="text-xl font-semibold text-orange-500">Step-1</h3>
-                  <p className="mt-4">Click on "Apply Now" and fill up the form to apply for MVIC</p>
+                  <p className="mt-4">Click on "Apply Now" and fill up the form to apply for Enrollment in MVIC</p>
                 </div>
               </div>
               <div className="w-full md:w-1/3 p-4">
