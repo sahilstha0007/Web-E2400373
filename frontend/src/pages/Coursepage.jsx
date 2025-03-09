@@ -20,7 +20,9 @@ const CoursePage = ({ course }) => {
             <span className="font-bold text-lg">{course.faculty}</span>
           </div>
           <div className="mt-4 flex items-center gap-4">
-            <Button className="w-full md:w-auto" onClick={() => setIsEnrolled(true)}>Enroll Now</Button>
+            <Button className="w-full md:w-auto" onClick={() => setIsEnrolled(true)}>
+              {isEnrolled ? "Enrolled" : "Enroll Now"}
+            </Button>
           </div>
         </div>
         
