@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Landing from './pages/Landing';
 import Home from './pages/Home';
 import Courses from './pages/Courses';
 import AuthPage from './pages/auth/Login';
@@ -19,8 +18,7 @@ function AppContent() {
     '/auth',
      "/instructor",
      "/instructor/create-new-course",
-     "/instructor/edit-course/:courseId",
-      "/"];
+     "/instructor/edit-course/:courseId",];
 
   return (
     <>
@@ -31,17 +29,17 @@ function AppContent() {
       )}
 
       <Routes>
-        <Route
+        {/* <Route
           path="/"
           element={
             <RouteProtection
               element={<Landing />}
               authenticated={auth?.authenticate}
               user={auth?.user}
-            />
+            /> */}
 
-          }
-        />
+          {/* } */}
+        {/* /> */}
         <Route
           path="/instructor"
           element={
@@ -80,7 +78,7 @@ function AppContent() {
           // />
         }
       />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/affiliate" element={<Affiliate />} />
         <Route path="/courses" element={<Courses />} />
