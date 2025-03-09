@@ -81,18 +81,16 @@ function AppContent() {
         }
       />
        <Route
-        path="/instructor/edit-course/:courseId"
-        element={
-          <RouteGuard
-            element={
-            <Home />
-          }
-            authenticated={auth?.authenticate}
-            user={auth?.user}
-          />
-        }
-      />
+          path="/home"
+          element={
+            <RouteProtection
+              element={<Home />}
+              authenticated={auth?.authenticate}
+              user={auth?.user}
+            /> 
 
+           } 
+         />
         <Route path="/" element={<Landing />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/affiliate" element={<Affiliate />} />
@@ -104,8 +102,7 @@ function AppContent() {
 
 function App() {
   return (
-    // <AppContent />
-    <Login />
+    <AppContent />
 
   );
 }
