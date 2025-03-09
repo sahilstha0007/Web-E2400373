@@ -9,7 +9,11 @@ import { useContext } from 'react';
 import InstructorDashboardpage from './pages/instructor';
 import AddNewCoursePage from './pages/instructor/add-new-course';
 import Affiliate from './pages/Affiliate';
+<<<<<<< HEAD
 import Landing from './pages/Landing';
+=======
+import Login from './pages/auth/Login';
+>>>>>>> afaf883861163492356e2886c1359a22b7373ba3
 
 
 function AppContent() {
@@ -93,7 +97,8 @@ function AppContent() {
 
 function App() {
   return (
-    <AppContent />
+    // <AppContent />
+    <Login />
 
   );
 }
