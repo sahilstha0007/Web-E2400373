@@ -45,7 +45,10 @@ const Navbar = () => {
   return (
     <header className={`fixed top-0 left-0 w-full ${theme === 'light' ? 'bg-gray-100' : 'bg-[#2f3136]'} flex justify-between items-center px-8 py-4 z-50`}>
       <div className="flex items-center gap-6 font-bold text-xl">
+        <NavLink
+        to={"/home"}>
         <p className="text-orange-500 text-2xl">MVIC</p>
+        </NavLink>
         <nav className="hidden md:flex gap-6 font-light">
           <NavLink to="/home">Home</NavLink>
           <NavLink to="/courses">Courses</NavLink>

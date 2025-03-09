@@ -21,7 +21,7 @@ function RouteProtection({ authenticated, user, element }) {
 
   if (
     authenticated &&
-    user.role === "instructor" &&
+    user.role === "teacher" &&
     !location.pathname.includes("instructor")
   ) {
     return <Navigate to="/instructor" />;
