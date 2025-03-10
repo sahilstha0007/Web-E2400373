@@ -18,9 +18,9 @@ function AppContent() {
   const location = useLocation();
   const noNavbarRoutes = [
     '/auth',
-    "/instructor",
-    "/instructor/create-new-course",
-    "/instructor/edit-course/:courseId",
+    // "/instructor",
+    // "/instructor/create-new-course",
+    // "/instructor/edit-course/:courseId",
     "/"];
 
   return (
