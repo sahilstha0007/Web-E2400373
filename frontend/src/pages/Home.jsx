@@ -50,7 +50,6 @@ function Home() {
 
   return (
     <>
-    <Landing/>
     <div className="min-h-screen bg-gray-100 dark:bg-[#2f3136] text-black dark:text-white">
       <header className="relative w-full h-96 overflow-hidden">
         <img src={slides[currentSlide].image} alt={slides[currentSlide].title} className="w-full h-full object-cover transition-all duration-500" />

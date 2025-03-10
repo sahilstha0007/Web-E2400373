@@ -46,7 +46,7 @@ const Navbar = () => {
       <div className="flex items-center gap-6 font-bold text-xl">
         <p className="text-orange-500 text-2xl">MVIC</p>
         <nav className="hidden md:flex gap-6 font-light">
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/home">Home</NavLink>
           <NavLink to="/courses">Courses</NavLink>
           <NavLink to="/affiliate">Affiliate</NavLink>
         </nav>
@@ -112,7 +112,7 @@ const Navbar = () => {
               <FaTimes />
             </button>
             <nav className="flex flex-col gap-4">
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/home">Home</NavLink>
               <NavLink to="/courses">Courses</NavLink>
               <NavLink to="/affiliate">Affilate</NavLink>
             </nav>
