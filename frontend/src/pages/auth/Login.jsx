@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const Login = () => {
   const [isSignup, setIsSignup] = useState(false);
@@ -7,6 +8,8 @@ const Login = () => {
     username: "",
     password: "",
   });
+  
+  const navigate = useNavigate(); // Initialize the navigate function
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,10 +18,15 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const endpoint = isSignup ? "http://localhost:8080/auth/signup" : "http://localhost:8080/auth/login";
-    
+
     try {
       const response = await axios.post(endpoint, formData);
       alert(response.data || "Success!");
+
+      if (!isSignup) {
+       
+        navigate("/courses");
+      }
     } catch (error) {
       alert(error.response?.data || "Something went wrong!");
     }

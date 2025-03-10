@@ -1,48 +1,53 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
-import { FaBookOpen, FaSun, FaMoon, FaBell, FaBars, FaTimes } from 'react-icons/fa';
-import defaultPFP from '../assets/non.png';
-import SearchResults from '../components/Searchresult';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Importing useNavigate hook
 
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isNotifOpen, setIsNotifOpen] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [showResults, setShowResults] = useState(false);
-  const searchContainerRef = useRef(null);
+const Login = () => {
+  const [isSignup, setIsSignup] = useState(false);
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
 
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+  const navigate = useNavigate(); // Initialize the navigate function
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const endpoint = isSignup ? "http://localhost:8080/auth/signup" : "http://localhost:8080/auth/login";
 
-  useEffect(() => {
-    document.body.classList.toggle('dark', theme === 'dark');
-  }, [theme]);
+    try {
+      const response = await axios.post(endpoint, formData);
+      alert(response.data || "Success!");
 
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-    setShowResults(e.target.value.length > 0);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
-        setShowResults(false);
+      if (!isSignup) {
+        // Redirect to landing page upon successful login
+        navigate("/courses"); // Ensure you navigate to the correct landing page
       }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+    } catch (error) {
+      alert(error.response?.data || "Something went wrong!");
+    }
+  };
 
   return (
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+        <h2 className="text-2xl font-bold text-center mb-4">{isSignup ? "Sign Up" : "Login"}</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-gray-700">Username</label>
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border rounded-lg"
+              placeholder="Enter your username"
+              required
+            />
     <header className={`fixed top-0 left-0 w-full ${theme === 'light' ? 'bg-gray-100' : 'bg-[#2f3136]'} flex justify-between items-center px-8 py-4 z-50`}>
       <div className="flex items-center gap-6 font-bold text-xl">
         <NavLink
@@ -121,10 +126,31 @@ const Navbar = () => {
               <NavLink to="/affiliate">Affilate</NavLink>
             </nav>
           </div>
-        </div>
-      )}
-    </header>
+          <div className="mb-4">
+            <label className="block text-gray-700">Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border rounded-lg"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+          <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+            {isSignup ? "Sign Up" : "Login"}
+          </button>
+        </form>
+        <p className="mt-4 text-center">
+          {isSignup ? "Already have an account?" : "Don't have an account?"}
+          <button onClick={() => setIsSignup(!isSignup)} className="text-blue-600 hover:underline ml-1">
+            {isSignup ? "Login" : "Sign Up"}
+          </button>
+        </p>
+      </div>
+    </div>
   );
 };
 
-export default Navbar;
+export default Login;
