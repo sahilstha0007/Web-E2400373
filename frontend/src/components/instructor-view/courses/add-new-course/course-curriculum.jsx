@@ -7,11 +7,11 @@ import { Switch } from "@/components/ui/switch";
 // import VideoPlayer from "@/components/video-player";
 import { courseCurriculumInitialFormData } from "@/config";
 import { InstructorContext } from "@/context/instructor-context";
-import {
-  mediaBulkUploadService,
-  mediaDeleteService,
-  mediaUploadService,
-} from "@/services";
+// import {
+//   mediaBulkUploadService,
+//   mediaDeleteService,
+//   mediaUploadService,
+// } from "@/services";
 import { Upload } from "lucide-react";
 import { useContext, useRef } from "react";
 

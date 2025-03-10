@@ -24,8 +24,9 @@ const Login = () => {
       alert(response.data || "Success!");
 
       if (!isSignup) {
-       
-        navigate("/courses");
+        // On successful login, store the login status (e.g., in localStorage)
+        localStorage.setItem("isLoggedIn", "true");  // Store login status
+        navigate("/");  // Redirect to the landing page
       }
     } catch (error) {
       alert(error.response?.data || "Something went wrong!");

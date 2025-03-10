@@ -1,27 +1,16 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Courses from './pages/Courses';
 import AuthPage from './pages/auth/Login';
-import RouteProtection from './components/protected_Route/protection';
-import { AuthContext } from './context/auth-context';
-import { useContext } from 'react';
-import InstructorDashboardpage from './pages/instructor';
-import AddNewCoursePage from './pages/instructor/add-new-course';
 import Affiliate from './pages/Affiliate';
 import Landing from './pages/Landing';
-import Login from './pages/auth/Login';
-
 
 function AppContent() {
-  const { auth } = useContext(AuthContext);
   const location = useLocation();
-  const noNavbarRoutes = [
-    '/auth',
-    // "/instructor",
-    // "/instructor/create-new-course",
-    // "/instructor/edit-course/:courseId",
-    "/"];
+  
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const noNavbarRoutes = ['/auth', "/"];
 
   return (
     <>
@@ -32,108 +21,21 @@ function AppContent() {
       )}
 
       <Routes>
-        {/* <Route
-          path="/"
-          element={
-            <RouteProtection
-              element={<Landing />}
-              authenticated={auth?.authenticate}
-              user={auth?.user}
-            /> */}
-
-        {/* } */}
-        {/* /> */}
-        <Route
-          path="/instructor"
-          element={
-            // <RouteGuard
-            // element={
-
-            <InstructorDashboardpage
-            //  />}
-            // authenticated={auth?.authenticate}
-            // user={auth?.user}
-            />
-          }
-        />
-
-        <Route
-          path="/instructor/create-new-course"
-          element={
-            // <RouteGuard
-            // element={
-            <AddNewCoursePage />
-            // }
-            // authenticated={auth?.authenticate}
-            // user={auth?.user}
-            // />
-          }
-        />
-        <Route
-          path="/instructor/edit-course/:courseId"
-          // element={
-          // <RouteGuard
-          element={
-            <AddNewCoursePage />
-            // }
-            // authenticated={auth?.authenticate}
-            // user={auth?.user}
-            // />
-          }
-        />
-        <Route
-          path="/home"
-          element={
-            <RouteProtection
-              element={<Home />}
-              authenticated={auth?.authenticate}
-              user={auth?.user}
-            />
-          }
-        />
         <Route
           path="/"
-          element={
-            <RouteProtection
-              element={<Landing />}
-              authenticated={auth?.authenticate}
-              user={auth?.user}
-            />
-          }
+          element={isLoggedIn ? <Landing /> : <Navigate to="/auth" />}
         />
-        <Route
-          path="/affiliate"
-          element={
-            <RouteProtection
-              element={<Affiliate />}
-              authenticated={auth?.authenticate}
-              user={auth?.user}
-            />
-          }
-        />
-        <Route
-          path="/courses"
-          element={
-            <RouteProtection
-              element={<Courses />}
-              authenticated={auth?.authenticate}
-              user={auth?.user}
-            />
-          }
-        />
-        <Route path="/auth" element={<AuthPage />} />
-        {/* <Route path="/affiliate" element={<Affiliate />} />
-        <Route path="/courses" element={<Courses />} /> */}
+        <Route path="/home" element={isLoggedIn ? <Home /> : <Navigate to="/auth" />} />
+        <Route path="/affiliate" element={isLoggedIn ? <Affiliate /> : <Navigate to="/auth" />} />
+        <Route path="/courses" element={isLoggedIn ? <Courses /> : <Navigate to="/auth" />} />
+        <Route path="/auth" element={!isLoggedIn ? <AuthPage /> : <Navigate to="/" />} />
       </Routes>
     </>
   );
 }
 
 function App() {
-  return (
-  <AppContent />
-
-  );
+  return <AppContent />;
 }
 
 export default App;
