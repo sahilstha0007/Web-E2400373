@@ -10,6 +10,7 @@ import InstructorDashboardpage from './pages/instructor';
 import AddNewCoursePage from './pages/instructor/add-new-course';
 import Affiliate from './pages/Affiliate';
 import Landing from './pages/Landing';
+import Login from './pages/auth/Login';
 
 
 function AppContent() {
@@ -102,7 +103,7 @@ function AppContent() {
 
 function App() {
   return (
-    <AppContent />
+  <AppContent />
 
   );
 }
