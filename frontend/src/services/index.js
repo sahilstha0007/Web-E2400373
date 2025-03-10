@@ -1,26 +1,18 @@
 import axiosInstance from "@/api/axiosInstance";
+import axios from "axios";
 
-export async function registerService(formData) {
-  const { data } = await axiosInstance.post("/auth/register", {
-    ...formData,
-    role: "user",
-  });
-
-  return data;
-}
-
-export async function loginService(formData) {
-  const { data } = await axiosInstance.post("/auth/login", formData);
-
-  return data;
-}
-
-export async function checkAuthService() {
-  const { data } = await axiosInstance.get("/auth/check-auth");
-
-  return data;
-}
-
+export const checkAuthService = async () => {
+  try {
+    const response = await axios.get("http://localhost:8080/auth/check-auth", {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(sessionStorage.getItem("accessToken"))}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error.response?.data || { success: false, message: "Something went wrong!" };
+  }
+};
 export async function mediaUploadService(formData, onProgressCallback) {
   const { data } = await axiosInstance.post("/media/upload", formData, {
     onUploadProgress: (progressEvent) => {

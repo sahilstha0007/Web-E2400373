@@ -1,30 +1,17 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
+import { AuthContext } from "@/context/auth-context";
 
-function RouteProtection({ authenticated, user, element }) {
+function RouteProtection({ element }) {
+  const { auth, loading } = useContext(AuthContext);
   const location = useLocation();
 
-  console.log(authenticated, user, "useruser");
-
-  if (!authenticated && !location.pathname.includes("/auth")) {
-    return <Navigate to="/auth" />;
+  if (loading) {
+    return <div>Loading...</div>; // You can replace this with a loading spinner
   }
 
-  if (
-    authenticated &&
-    user?.role !== "instructor" &&
-    (location.pathname.includes("instructor") ||
-      location.pathname.includes("/auth"))
-  ) {
-    return <Navigate to="/home" />;
-  }
-
-  if (
-    authenticated &&
-    user.role === "instructor" &&
-    !location.pathname.includes("instructor")
-  ) {
-    return <Navigate to="/instructor" />;
+  if (!auth.authenticate) {
+    return <Navigate to="/auth" state={{ from: location }} />;
   }
 
   return <Fragment>{element}</Fragment>;

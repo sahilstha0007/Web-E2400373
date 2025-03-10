@@ -40,14 +40,14 @@ export const signInFormControls = [
 ];
 
 export const initialSignInFormData = {
-  userEmail: "",
+  username: "",
   password: "",
 };
 
 export const initialSignUpFormData = {
-  userName: "",
-  userEmail: "",
+  username: "",
   password: "",
+  email: "",
 };
 
 export const languageOptions = [
