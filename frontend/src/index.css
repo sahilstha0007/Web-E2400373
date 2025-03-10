@@ -1,8 +1,12 @@
+
+/* src/styles.css */
 @import "tailwindcss";
+/* @config "./tailwind.config.js"; */
 
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
+
 
 :root {
   --background: oklch(1 0 0);

@@ -21,7 +21,8 @@ function AppContent() {
     // "/instructor",
     // "/instructor/create-new-course",
     // "/instructor/edit-course/:courseId",
-    "/"];
+    // "/"
+  ];
 
   return (
     <>
@@ -93,13 +94,13 @@ function AppContent() {
         />
         <Route
           path="/"
-          element={
-            <RouteProtection
+          // element={
+            // <RouteProtection
               element={<Landing />}
-              authenticated={auth?.authenticate}
-              user={auth?.user}
-            />
-          }
+              // authenticated={auth?.authenticate}
+              // user={auth?.user}
+            // />
+        // {/* } */}
         />
         <Route
           path="/affiliate"
