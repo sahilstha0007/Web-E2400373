@@ -18,9 +18,9 @@ function AppContent() {
   const location = useLocation();
   const noNavbarRoutes = [
     '/auth',
-     "/instructor",
-     "/instructor/create-new-course",
-     "/instructor/edit-course/:courseId",
+    "/instructor",
+    "/instructor/create-new-course",
+    "/instructor/edit-course/:courseId",
     "/"];
 
   return (
@@ -41,7 +41,7 @@ function AppContent() {
               user={auth?.user}
             /> */}
 
-          {/* } */}
+        {/* } */}
         {/* /> */}
         <Route
           path="/instructor"
@@ -61,41 +61,69 @@ function AppContent() {
           path="/instructor/create-new-course"
           element={
             // <RouteGuard
-              // element={
-              <AddNewCoursePage />
+            // element={
+            <AddNewCoursePage />
             // }
-              // authenticated={auth?.authenticate}
-              // user={auth?.user}
+            // authenticated={auth?.authenticate}
+            // user={auth?.user}
             // />
           }
         />
         <Route
-        path="/instructor/edit-course/:courseId"
-        // element={
+          path="/instructor/edit-course/:courseId"
+          // element={
           // <RouteGuard
-            element={
+          element={
             <AddNewCoursePage />
-          // }
+            // }
             // authenticated={auth?.authenticate}
             // user={auth?.user}
-          // />
-        }
-      />
-       <Route
+            // />
+          }
+        />
+        <Route
           path="/home"
           element={
             <RouteProtection
               element={<Home />}
               authenticated={auth?.authenticate}
               user={auth?.user}
-            /> 
-
-           } 
-         />
-        <Route path="/" element={<Landing />} />
+            />
+          }
+        />
+        <Route
+          path="/"
+          element={
+            <RouteProtection
+              element={<Landing />}
+              authenticated={auth?.authenticate}
+              user={auth?.user}
+            />
+          }
+        />
+        <Route
+          path="/affiliate"
+          element={
+            <RouteProtection
+              element={<Affiliate />}
+              authenticated={auth?.authenticate}
+              user={auth?.user}
+            />
+          }
+        />
+        <Route
+          path="/courses"
+          element={
+            <RouteProtection
+              element={<Courses />}
+              authenticated={auth?.authenticate}
+              user={auth?.user}
+            />
+          }
+        />
         <Route path="/auth" element={<AuthPage />} />
-        <Route path="/affiliate" element={<Affiliate />} />
-        <Route path="/courses" element={<Courses />} />
+        {/* <Route path="/affiliate" element={<Affiliate />} />
+        <Route path="/courses" element={<Courses />} /> */}
       </Routes>
     </>
   );
