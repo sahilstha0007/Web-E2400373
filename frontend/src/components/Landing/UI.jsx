@@ -84,7 +84,7 @@ export const UI = () => {
 
       <div className="fixed inset-0 flex items-center -rotate-2 select-none">
         <div className="relative">
-          <div className="bg-white/0  animate-horizontal-scroll flex items-center gap-8 w-max px-8">
+          <div className="bg-white/0 flex items-center gap-8 w-max px-8" style={{ animation: "horizontal-scroll linear 16s infinite", transition: "transform 0.5s ease-in-out" }}>
             <h1 className="shrink-0 text-white text-10xl font-black ">
               MVIC
             </h1>
@@ -110,7 +110,7 @@ export const UI = () => {
               Creative
             </h2>
           </div>
-          <div className="absolute top-0 left-0 bg-white/0 animate-horizontal-scroll-2 flex items-center gap-8 px-8 w-max">
+          <div className="absolute top-0 left-0 bg-white/0 flex items-center gap-8 px-8 w-max" style={{ animation: "horizontal-scroll-2 linear 16s infinite", transition: "transform 0.5s ease-in-out" }}>
             <h1 className="shrink-0 text-white text-10xl font-black ">
               Lms
             </h1>

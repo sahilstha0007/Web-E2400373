@@ -1,10 +1,10 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap");
 
 #root {
   width: 100vw;
   height: 100vh;
   background: radial-gradient(#ff7200, #232323 80%);
-}
+} 
 
 body {
   margin: 0;
@@ -12,4 +12,14 @@ body {
 
 .outline-text {
   -webkit-text-stroke: 1px white;
-} */
+}
+
+@keyframes horizontal-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+@keyframes horizontal-scroll-2 {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}

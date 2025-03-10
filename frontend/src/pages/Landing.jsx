@@ -8,6 +8,7 @@ import './Landing.css'; // Import the CSS file
 function Landing() {
   return (
     <>
+    <div className="w-screen h-screen bg-gradient-radial from-orange-500 to-gray-900">
       <UI />
       <Loader />
       <Canvas shadows camera={{ position: [-0.5, 1, 4], fov: 45 }}>
@@ -17,6 +18,7 @@ function Landing() {
           </Suspense>
         </group>
       </Canvas>
+    </div>
     </>
   );
 }
